@@ -28,12 +28,12 @@
 </script>
 
 <style>
-  .loading .loader-inner svg {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-  }
+  /*.loading .loader-inner svg {*/
+    /*display: block;*/
+    /*position: absolute;*/
+    /*left: 25%;*/
+    /*top: 25%;*/
+  /*}*/
 </style>
 <style scoped>
   .loading {
@@ -50,9 +50,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -28px 0 0 -28px;
-    width: 56px;
-    height: 56px;
+    margin: -50px 0 0 -50px;
+    width: 100px;
+    height: 100px;
     background: #333;
     border-radius: 5px;
     opacity: 0.9;
@@ -61,8 +61,9 @@
   .loading .loader-inner span {
     display: block;
     position: absolute;
-    left: 0;
-    top: 0;
+    margin: -14px 0 0 -14px; /* no */
+    left: 50%;
+    top: 50%;
   }
 
   .vux-spinner-android {

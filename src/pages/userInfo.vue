@@ -1,57 +1,78 @@
 <template>
   <div>
-    <div class="abs mt15 content_box userInfo_box">
-      <img src="../assets/images/suc.png">
+    <div class="fs26 c_red">
+      <a href="#/home">首页</a>
+      <a href="#/userInfo">个人信息</a>
     </div>
-    <DialogAlert :content="Alert.content" :buttonText="Alert.buttonText"></DialogAlert>
-    <DialogConfirm :content="Alert.content" :buttonText="Alert.buttonText" v-on:DialogConfirmCallBack="DialogConfirmCallBack"></DialogConfirm>
+    <div class="fs36 c_999 mt10 box-des mt15">
+      个人信息：验证解决引：结合lib-flexible、px2rem实现移动端适配，完美解决第三方ui库样式变小问题
+    </div>
+    <div class="mt15">
+      <group>
+        <calendar :readonly="readonly" v-model="demo1" title="一般使用" disable-past placeholder="placeholder" @on-show="log('show')" @on-hide="log('hide')"></calendar>
+      </group>
+
+      <div style="padding:15px;">
+        <x-button type="primary" @click.native="readonly = !readonly">切换readonly</x-button>
+      </div>
+
+      <group>
+        <calendar v-model="demo2" title="设置时间为今天" disable-past></calendar>
+      </group>
+
+      <group>
+        <calendar @on-change="onChange" v-model="demo3" title="禁止选中未来时间" disable-future></calendar>
+      </group>
+
+      <group>
+        <calendar @on-change="onChange" v-model="demo4" title="显示popup头部" show-popup-header popup-header-title="请选择" disable-future></calendar>
+      </group>
+
+      <group>
+        <calendar placeholder="placeholder" @on-change="onChange" v-model="demo5" title="多选" popup-header-title="请选择" disable-future></calendar>
+      </group>
+
+      <group>
+        <calendar disable-weekend :display-format="displayFormat" placeholder="请选择日期" @on-change="onChange" v-model="demo6" title="格式化表单值" popup-header-title="请选择"></calendar>
+        <cell-box align-items="flex-start">
+          <span class="selected-days">value:</span>
+          <div>
+            <badge v-for="day in demo6" :text="day" :key="day" style="margin-right:10px;"></badge>
+          </div>
+        </cell-box>
+      </group>
+      <div style="padding:15px;">
+        <x-button type="primary" @click.native="demo6 = []">清空值</x-button>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-  import {Group, XInput, XButton, Popup, TransferDom, PopupPicker} from 'vux'
-  import DialogAlert from '../components/DialogAlert.vue'
-  import DialogConfirm from '../components/DialogConfirm.vue'
+  import { Group, Calendar, Cell, Badge, CellBox, XButton } from 'vux'
   export default {
-    directives: {
-      TransferDom
-    },
     components: {
-      Group, XInput, XButton, Popup, PopupPicker, DialogAlert, DialogConfirm
+      Calendar,
+      Group,
+      Cell,
+      Badge,
+      CellBox,
+      XButton
     },
     data () {
       return {
-        token: '', // 用户标识
-        style: '#9495ab',
-        btnLoading: false,
-        btnDisable: true,
-        form: {
-          otherPlatformLoan: '', // 其他平台借款
-          companyName: '', // 工作单位
-          email: '', // 电子邮箱
-          salary: '', // 月工资收入
-          loanReasonValue: [], // 借款理由
-          educationTypeValue: [], // 教育程度
-          professionValue: [], // 从事职业
-          contactsRelationValue: [], // 关系
-          contactsName: '', // 联系人姓名
-          contactsMobile: '', // 联系人手机
-          contactsMobile_disabled: true, // 联系人手机是否不可以编辑
-          contactsName_disabled: true // 联系人姓名是否不可以编辑
-        },
-        popup: {
-          showLoanReason: false,
-          LoanReasonList: [],
-          showEducationType: false,
-          EducationTypeList: [],
-          showProfession: false,
-          ProfessionList: [],
-          showContactsRelation: false,
-          ContactsRelationList: []
-        },
-        Alert: {
-          show: false,
-          content: '请使用本人手机通讯录进行授权，请确保手机通讯录权限打开，以确保成功授权',
-          buttonText: '我知道了'
+        readonly: false,
+        demo1: '',
+        demo2: 'TODAY',
+        demo3: 'TODAY',
+        demo4: 'TODAY',
+        demo5: [],
+        demo6: [],
+        displayFormat (value, type) {
+          if (type === 'string') {
+            return value
+          } else {
+            return value.length ? (value.length + ' days') : ''
+          }
         }
       }
     },
@@ -65,23 +86,21 @@
     mounted () {
     },
     methods: {
-      DialogConfirmCallBack () {}
+      log (str) {
+        console.log(str)
+      },
+      onChange (val) {
+        console.log('on change', val)
+      }
     }
   }
 </script>
-<style>
-  .userInfo_box .weui-cell{ padding:0.25rem 0 0.3rem!important;border-bottom: 0.01rem solid #eeeeee;}
-  .userInfo_box .weui-input{ height: 2em!important; line-height: 2!important;}
-  .userInfo_box [class^="weui-icon-"]:before, [class*=" weui-icon-"]:before {margin-right: 0.88em!important;}
-  .userInfo_box .vux-cell-box{ display: none!important;}
-  .userInfo_box .form_input_box_right_ico .weui-icon-clear{ margin-top: -0.375rem;}
-  .userInfo_box .weui-cell_access .weui-cell__ft:after{border-width:0.01rem 0.01rem 0 0; width: 0.18rem; height: 0.18rem;}
-</style>
-<style lang="less" scoped>
-  .form_input_box{padding: 0 0 0 15px; position: relative;}
-  .form_mid_title{ padding-left: 15px; height: 1.12rem; line-height: 1.12rem;}
-  .add_contact_ico{ width: 0.5rem; height: auto; margin:0 0.25rem 0 0;}
-  .vux-cell-arrow-down {transform:rotate(90deg);}
+
+<style scoped>
+  .selected-days {
+    color: #999;
+    width: 90px;
+  }
 </style>
 
 

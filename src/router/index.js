@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+const home = () => import('../pages/home.vue')
 const userInfo = () => import('../pages/userInfo.vue')
 const tip = () => import('../pages/tip/tip.vue')
 const nofind = () => import('../pages/tip/nofind.vue')
@@ -11,7 +12,8 @@ Vue.use(Router)
  **/
 export default new Router({
   routes: [
-    {path: '/', redirect: '/userInfo', meta: {title: '个人信息认证'}},
+    {path: '/', component: home, redirect: '/home', meta: {title: '首页'}},
+    {path: '/home', component: home, meta: {title: '首页'}},
     {path: '/userInfo', component: userInfo, meta: {title: '个人信息认证'}},
     {path: '/tip', component: tip, meta: {title: '提示'}},
     {path: '/nofind', component: nofind, meta: {title: '404'}},
