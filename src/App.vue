@@ -1,23 +1,24 @@
 <template>
   <div id="app">
-    <Header></Header>
-    <ToastTip></ToastTip>
+    <div class="fs56">
+      <a href="#/home" class="c_red">home</a>
+      <a href="#/vuxui" class="c_red">vux-ui</a>
+      <a href="#/museui" class="c_red">muse-ui</a>
+    </div>
     <Loading :show="AppState.loadingShow"></Loading>
-    <router-view :class="className"></router-view>
+    <router-view></router-view>
     <toast v-model="AppState.toastShow" type="text" :time="2000" :width="AppState.toastWidth" is-show-mask
            :text="AppState.toastMsg" @on-hide="onHide"></toast>
   </div>
 </template>
 
 <script>
-  import Header from './components/Header.vue'
-  import ToastTip from './components/ToastTip.vue'
   import Loading from './components/Loading.vue'
   import {mapState} from 'vuex'
   import {Toast} from 'vux'
   export default {
     components: {
-      Header, Loading, Toast, ToastTip
+      Loading, Toast
     },
     data () {
       return {
@@ -30,16 +31,16 @@
       })
     },
     watch: {
-      AppState: {
-        handler (curVal, oldVal) {
-          if (curVal.showHeader) {
-            this.className = 'scroll_hide_header_box'
-          } else {
-            this.className = 'scroll_show_header_box'
-          }
-        },
-        deep: true
-      }
+      // AppState: {
+      //   handler (curVal, oldVal) {
+      //     if (curVal.showHeader) {
+      //       this.className = 'scroll_hide_header_box'
+      //     } else {
+      //       this.className = 'scroll_show_header_box'
+      //     }
+      //   },
+      //   deep: true
+      // }
     },
     created () {
       // let userLoginInfo = {

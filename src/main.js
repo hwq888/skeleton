@@ -10,6 +10,13 @@ import store from './vuex/store'
 import './assets/css/base.css'
 import httpError from './assets/js/httpError'
 import Utils from './assets/js/Utils'
+
+import './muse-ui' // muse-ui css
+import Message from 'muse-ui-message'
+import Toast from 'muse-ui-toast'
+Vue.use(Message)
+Vue.use(Toast)
+
 Vue.prototype.$Utils = Utils
 Vue.prototype.$bus = new Vue({})
 Vue.use(httpError)

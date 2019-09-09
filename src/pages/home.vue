@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="fs26 c_red">
-      <a href="#/home">首页</a>
-      <a href="#/userInfo">个人信息</a>
-    </div>
     <div class="fs36 c_999 mt10 box-des mt15">
       首页：刷新可查看skeleton的效果
     </div>

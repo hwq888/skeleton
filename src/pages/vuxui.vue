@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="fs26 c_red">
-      <a href="#/home">首页</a>
-      <a href="#/userInfo">个人信息</a>
-    </div>
     <div class="fs36 c_999 mt10 box-des mt15">
-      个人信息：验证解决引：结合lib-flexible、px2rem实现移动端适配，完美解决第三方ui库样式变小问题
+      vuxui：验证解决引：结合lib-flexible、px2rem实现移动端适配，完美解决第三方ui库样式变小问题
     </div>
     <div class="mt15">
       <group>
