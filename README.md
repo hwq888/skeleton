@@ -2,7 +2,7 @@
 
 > vue + vux-ui + muse-ui + skelteon 骨架屏
 
-![Image text]https://github.com/hwq888/skeleton/tree/master/static/demo.gif)
+![Image text](https://github.com/hwq888/skeleton/tree/master/static/demo.gif)
 
 说明：
 - skeleton：刷新可以查看
