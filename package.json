@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "fastclick": "^1.0.6",
     "lib-flexible": "^0.3.2",
     "muse-ui": "^3.0.2",
